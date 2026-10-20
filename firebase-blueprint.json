@@ -1,0 +1,118 @@
+{
+  "entities": {
+    "Company": {
+      "title": "Company",
+      "description": "Company data workspace including business profile, rules, products, and configuration for Dentismed CRM",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique company workspace identifier"
+        },
+        "ownerUserId": {
+          "type": "string",
+          "description": "User identifier who created or owns this workspace"
+        },
+        "businessProfile": {
+          "type": "object",
+          "description": "Profile details including name, phone, email, tone, and welcome message"
+        },
+        "aiSettings": {
+          "type": "object",
+          "description": "AI provider model parameters and auto-qualification settings"
+        },
+        "rules": {
+          "type": "array",
+          "description": "Custom automated triggers, special rules and handover instructions"
+        },
+        "products": {
+          "type": "array",
+          "description": "Services and product catalog, including promotions"
+        },
+        "faqs": {
+          "type": "array",
+          "description": "Frequently asked questions for AI bot training"
+        },
+        "leads": {
+          "type": "array",
+          "description": "Summary list of leads and patients"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["id", "businessProfile"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Lead or patient in the CRM pipeline",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique lead identifier"
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of patient or lead"
+        },
+        "phone": {
+          "type": "string",
+          "description": "E.164 or formatted WhatsApp phone number"
+        },
+        "stage": {
+          "type": "string",
+          "description": "Funnel stage: nuevo, contactado, cotizado, ganado, perdido"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last modification"
+        }
+      },
+      "required": ["id", "name", "phone"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Individual chat message exchanged with lead",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique message identifier"
+        },
+        "leadId": {
+          "type": "string",
+          "description": "Associated lead ID"
+        },
+        "text": {
+          "type": "string",
+          "description": "Content of the message"
+        },
+        "sender": {
+          "type": "string",
+          "description": "Sender identifier: user, lead, or bot"
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "ISO or formatted timestamp of message"
+        }
+      },
+      "required": ["id", "text", "sender"]
+    }
+  },
+  "firestore": {
+    "/companies/{companyId}": {
+      "schema": "Company",
+      "description": "Stores company workspace configuration, profile, and catalog"
+    },
+    "/companies/{companyId}/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Stores individual lead and patient records"
+    },
+    "/companies/{companyId}/leads/{leadId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Stores chat messages for a specific lead"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "OrdenFacilCRM - WhatsApp Bot & CRM",
+  "description": "OrdenFacilCRM: CRM inteligente multi-empresa con bot de IA para WhatsApp Business, entrenamiento continuo diario, gestión de normativas de ventas e integración con OpenAI y Gemini.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
